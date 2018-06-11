@@ -1,0 +1,29 @@
+Class SprzedazInternetowa1.Stanowisko Extends (%Persistent, %Populate, %XML.Adaptor, %ZEN.DataModel.Adaptor)
+{
+
+Property NazwaStanowiska As %String [ Required ];
+
+Property PodstawaWynagrodzenia As %Float [ Required ];
+
+Storage Default
+{
+<Data name="StanowiskoDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>NazwaStanowiska</Value>
+</Value>
+<Value name="3">
+<Value>PodstawaWynagrodzenia</Value>
+</Value>
+</Data>
+<DataLocation>^SprzedazInterne9CD4.StanowiskoD</DataLocation>
+<DefaultData>StanowiskoDefaultData</DefaultData>
+<IdLocation>^SprzedazInterne9CD4.StanowiskoD</IdLocation>
+<IndexLocation>^SprzedazInterne9CD4.StanowiskoI</IndexLocation>
+<StreamLocation>^SprzedazInterne9CD4.StanowiskoS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}

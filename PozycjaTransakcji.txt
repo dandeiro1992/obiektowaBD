@@ -1,0 +1,43 @@
+Class SprzedazInternetowa1.PozycjaTransakcji Extends %Persistent
+{
+
+Property NumerTransakcji As %Integer [ Required ];
+
+Property LiczbaPorzadkowa As %Integer [ Required ];
+
+Relationship PoTo As SprzedazInternetowa1.Towar [ Cardinality = one, Inverse = ToPo ];
+
+Index PoToIndex On PoTo;
+
+Relationship PoTra As SprzedazInternetowa1.Transakcja [ Cardinality = one, Inverse = TraPo ];
+
+Index PoTraIndex On PoTra;
+
+Storage Default
+{
+<Data name="PozycjaTransakcjiDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>NumerTransakcji</Value>
+</Value>
+<Value name="3">
+<Value>LiczbaPorzadkowa</Value>
+</Value>
+<Value name="4">
+<Value>PoTo</Value>
+</Value>
+<Value name="5">
+<Value>PoTra</Value>
+</Value>
+</Data>
+<DataLocation>^SprzedazIn9CD4.PozycjaTran3AF7D</DataLocation>
+<DefaultData>PozycjaTransakcjiDefaultData</DefaultData>
+<IdLocation>^SprzedazIn9CD4.PozycjaTran3AF7D</IdLocation>
+<IndexLocation>^SprzedazIn9CD4.PozycjaTran3AF7I</IndexLocation>
+<StreamLocation>^SprzedazIn9CD4.PozycjaTran3AF7S</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}

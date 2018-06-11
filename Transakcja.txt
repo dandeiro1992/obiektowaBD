@@ -1,0 +1,70 @@
+Class SprzedazInternetowa1.Transakcja Extends %Persistent
+{
+
+Property NumerTransakcji As %Integer [ Required ];
+
+Property DataTransakcji As %DataType [ Required ];
+
+Property KwotaTransakcji As %Float [ Required ];
+
+Property UbezpieczenieTransakcji As %Boolean [ Required ];
+
+Relationship TraKli As SprzedazInternetowa1.Klient [ Cardinality = one, Inverse = KliTra ];
+
+Index TraKliIndex On TraKli;
+
+Relationship TraPra As SprzedazInternetowa1.Pracownik [ Cardinality = one, Inverse = PraTra ];
+
+Index TraPraIndex On TraPra;
+
+Relationship TraPo As SprzedazInternetowa1.PozycjaTransakcji [ Cardinality = many, Inverse = PoTra ];
+
+Method ilewydalklient(ide As %Integer) As %Float
+{
+	set numer=..NumerTransakcji
+	//set id=ide
+		&sql(select sum(CenaTowaru) INTO :zmienna from 
+		(select tow.NazwaTowaru,tow.CenaTowaru,posi.NumerTransakcji,tran.ID 
+		from SprzedazInternetowa1.Transakcja as tran join SprzedazInternetowa1.PozycjaTransakcji as posi 
+		on tran.ID=posi.PoTra join SprzedazInternetowa1.Towar as tow 
+		on tow.ID=posi.PoTo join SprzedazInternetowa1.Klient as kli 
+		on kli.ID=tran.TraKli 
+		where kli.ID=:ide))
+			
+		Return zmienna
+}
+
+Storage Default
+{
+<Data name="TransakcjaDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>NumerTransakcji</Value>
+</Value>
+<Value name="3">
+<Value>DataTransakcji</Value>
+</Value>
+<Value name="4">
+<Value>KwotaTransakcji</Value>
+</Value>
+<Value name="5">
+<Value>UbezpieczenieTransakcji</Value>
+</Value>
+<Value name="6">
+<Value>TraKli</Value>
+</Value>
+<Value name="7">
+<Value>TraPra</Value>
+</Value>
+</Data>
+<DataLocation>^SprzedazInterne9CD4.TransakcjaD</DataLocation>
+<DefaultData>TransakcjaDefaultData</DefaultData>
+<IdLocation>^SprzedazInterne9CD4.TransakcjaD</IdLocation>
+<IndexLocation>^SprzedazInterne9CD4.TransakcjaI</IndexLocation>
+<StreamLocation>^SprzedazInterne9CD4.TransakcjaS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}

@@ -1,0 +1,62 @@
+Class SprzedazInternetowa1.Towar Extends (%Persistent, %Populate, %XML.Adaptor, %ZEN.DataModel.Adaptor)
+{
+
+Property NumerTowaru As %Integer [ Required ];
+
+Index NumerTowaruIndex On NumerTowaru [ Unique ];
+
+Relationship ToPo As SprzedazInternetowa1.PozycjaTransakcji [ Cardinality = many, Inverse = PoTo ];
+
+Property NazwaTowaru As %String [ Required ];
+
+Property OpisTowaru As %String [ Required ];
+
+Property DlaDoroslych As %Boolean [ Required ];
+
+Property CenaTowaru As %Float [ Required ];
+
+Property LiczbaDostepnych As %Integer [ Required ];
+
+Method opistowaru() As %String
+{
+	set zmienna=..DlaDoroslych
+		IF zmienna=1  {SET x=" to jest towar dla doroslych "} ELSE 
+							{SET x= " to jest towar dla wszystkich "}
+		SET opis="Nazwa towaru: "_..NazwaTowaru_", Opis: "_..OpisTowaru_" "_x
+		Return opis
+}
+
+Storage Default
+{
+<Data name="TowarDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>NumerTowaru</Value>
+</Value>
+<Value name="3">
+<Value>NazwaTowaru</Value>
+</Value>
+<Value name="4">
+<Value>OpisTowaru</Value>
+</Value>
+<Value name="5">
+<Value>DlaDoroslych</Value>
+</Value>
+<Value name="6">
+<Value>CenaTowaru</Value>
+</Value>
+<Value name="7">
+<Value>LiczbaDostepnych</Value>
+</Value>
+</Data>
+<DataLocation>^SprzedazInternetowa1.TowarD</DataLocation>
+<DefaultData>TowarDefaultData</DefaultData>
+<IdLocation>^SprzedazInternetowa1.TowarD</IdLocation>
+<IndexLocation>^SprzedazInternetowa1.TowarI</IndexLocation>
+<StreamLocation>^SprzedazInternetowa1.TowarS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}
