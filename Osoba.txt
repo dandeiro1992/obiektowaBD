@@ -1,0 +1,29 @@
+Class SprzedazInternetowa1.Osoba [ Abstract ]
+{
+
+Property Pesel As %String(MAXLEN = 11, PATTERN = "11N") [ Required ];
+
+Index PeselIndex On Pesel [ Unique ];
+
+Property Imie As %String(MAXLEN = 15, VALUELIST = ",Patryk,Damian,Robert") [ Required ];
+
+Property Nazwisko As %String(MAXLEN = 15, VALUELIST = ",Iwasiuk,Jarosz,Krata") [ Required ];
+
+Property DataUrodzenia As %DataType [ Required ];
+
+Property NumerTelefonu As %Char(MAXLEN = 9, MINLEN = 9, PATTERN = "9N") [ Required ];
+
+Method podajWiek() As %Integer
+{
+		SET x="year"
+		SET data=..DataUrodzenia
+		&sql(SELECT DATEDIFF(:x,:data,CURRENT_DATE)
+			INTO :diff)
+		Return diff
+}
+
+Method przedstawsie()
+{
+}
+
+}
