@@ -1,0 +1,68 @@
+Class SprzedazInternetowa1.Pracownik Extends (%Persistent, %Populate, %XML.Adaptor, %ZEN.DataModel.Adaptor, SprzedazInternetowa1.Osoba)
+{
+
+Relationship PraTra As SprzedazInternetowa1.Transakcja [ Cardinality = many, Inverse = TraPra ];
+
+Property ZajmowaneStanowisko As Stanowisko [ Required ];
+
+Method przedstawsie() As %String
+{
+		SET temp1=..Imie_" "
+		SET temp2=..Nazwisko_" "
+		SET temp3=..ZajmowaneStanowisko.NazwaStanowiska
+		Return temp1_temp2_temp3
+}
+
+Method sprawdzwiek(id As %Integer) As %String
+{
+		SET client=##class(SprzedazInternetowa1.Klient).%OpenId(id)
+		IF client.podajWiek()<18 SET x="Nie da rady, nie masz 18 lat" ELSE
+					SET x="Prosze bardzo, podany klient ma wystarczajaco lat"
+		Return x
+}
+
+Method ilezarabia() As %Float
+{
+		SET x="year"
+		SET data=..DataUrodzenia
+		&sql(SELECT DATEDIFF(:x,:data,CURRENT_DATE)
+			INTO :diff)
+		SET podstawa=..ZajmowaneStanowisko.PodstawaWynagrodzenia
+		SET y=podstawa+(diff*100)
+		Return y
+}
+
+Storage Default
+{
+<Data name="PracownikDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Pesel</Value>
+</Value>
+<Value name="3">
+<Value>ZajmowaneStanowisko</Value>
+</Value>
+<Value name="4">
+<Value>Imie</Value>
+</Value>
+<Value name="5">
+<Value>Nazwisko</Value>
+</Value>
+<Value name="6">
+<Value>DataUrodzenia</Value>
+</Value>
+<Value name="7">
+<Value>NumerTelefonu</Value>
+</Value>
+</Data>
+<DataLocation>^SprzedazInternetowa1.PracownikD</DataLocation>
+<DefaultData>PracownikDefaultData</DefaultData>
+<IdLocation>^SprzedazInternetowa1.PracownikD</IdLocation>
+<IndexLocation>^SprzedazInternetowa1.PracownikI</IndexLocation>
+<StreamLocation>^SprzedazInternetowa1.PracownikS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}

@@ -1,0 +1,50 @@
+Class SprzedazInternetowa1.Klient Extends (%Persistent, %Populate, %XML.Adaptor, %ZEN.DataModel.Adaptor, SprzedazInternetowa1.Osoba)
+{
+
+Relationship KliTra As SprzedazInternetowa1.Transakcja [ Cardinality = many, Inverse = TraKli ];
+
+ClassMethod losujprzywitanie() As %Integer
+{
+		SET liczba=$RANDOM(2)
+		IF liczba=1 SET x="Jestem waszym stalym klientem, dajcie mi rabat" ELSE
+				SET x="Pierwszy raz tu jestem, oprowadzcie mnie"
+		write x
+}
+
+Method przedstawsie() As %Integer
+{
+		do ..losujprzywitanie()
+		Return 1
+}
+
+Storage Default
+{
+<Data name="KlientDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Pesel</Value>
+</Value>
+<Value name="3">
+<Value>Imie</Value>
+</Value>
+<Value name="4">
+<Value>Nazwisko</Value>
+</Value>
+<Value name="5">
+<Value>DataUrodzenia</Value>
+</Value>
+<Value name="6">
+<Value>NumerTelefonu</Value>
+</Value>
+</Data>
+<DataLocation>^SprzedazInternetowa11.KlientD</DataLocation>
+<DefaultData>KlientDefaultData</DefaultData>
+<IdLocation>^SprzedazInternetowa1.KlientD</IdLocation>
+<IndexLocation>^SprzedazInternetowa1.KlientI</IndexLocation>
+<StreamLocation>^SprzedazInternetowa1.KlientS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}
