@@ -1,0 +1,2 @@
+SELECT SUM(CenaTowaru) INTO zmienna from Towar where NumerTojoin PozycjaTransakcji
+			on Towar.ToPo=PozycjaTranzakcji.PoTo where PozycjaTransakcji.NumerTransakcji=numer
