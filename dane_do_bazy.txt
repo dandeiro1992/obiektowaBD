@@ -1,0 +1,206 @@
+Set stanowisko1 =##class(SprzedazInternetowa1.Stanowisko).%New()
+Set stanowisko1.NazwaStanowiska = "Kierownik"
+Set stanowisko1.PodstawaWynagrodzenia = 20000
+zwrite stanowisko1
+set p=stanowisko1.%Save()
+do $system.OBJ.DisplayError(p)
+
+Set stanowisko2 =##class(SprzedazInternetowa1.Stanowisko).%New()
+Set stanowisko2.NazwaStanowiska = "Pracownik"
+Set stanowisko2.PodstawaWynagrodzenia = 2000
+zwrite stanowisko2
+set p=stanowisko2.%Save()
+do $system.OBJ.DisplayError(p)
+
+
+Set pra1 =##class(SprzedazInternetowa1.Pracownik).%New()
+Set pra1.Pesel = "93091901097"
+Set pra1.Imie = "Patryk"
+Set pra1.Nazwisko = "Iwasiuk"
+Set pra1.NumerTelefonu = "123456789"
+Set pra1.DataUrodzenia = "1995-02-10"
+Set pra1.ZajmowaneStanowisko =##class(SprzedazInternetowa1.Stanowisko).%OpenId(1)
+
+Set pra2 =##class(SprzedazInternetowa1.Pracownik).%New()
+Set pra2.Pesel = "84061602160"
+Set pra2.Imie = "Damian"
+Set pra2.Nazwisko = "Krata"
+Set pra2.NumerTelefonu = "661126222"
+Set pra2.DataUrodzenia = "1992-09-03"
+Set pra2.ZajmowaneStanowisko =##class(SprzedazInternetowa1.Stanowisko).%OpenId(2)
+
+set p=pra1.%Save()
+do $system.OBJ.DisplayError(p)
+set p=pra2.%Save()
+do $system.OBJ.DisplayError(p)
+
+
+
+
+Set klient1 =##class(SprzedazInternetowa1.Klient).%New()
+Set klient1.Pesel = "94031318331"
+Set klient1.Imie = "Alina"
+Set klient1.Nazwisko = "Krata"
+Set klient1.NumerTelefonu = "159866789"
+Set klient1.DataUrodzenia = "1994-03-13"
+
+Set klient2 =##class(SprzedazInternetowa1.Klient).%New()
+Set klient2.Pesel = "67101915198"
+Set klient2.Imie = "Robert"
+Set klient2.Nazwisko = "Jarosz"
+Set klient2.NumerTelefonu = "159865589"
+Set klient2.DataUrodzenia = "1967-10-19"
+
+
+set p=klient1.%Save()
+do $system.OBJ.DisplayError(p)
+set p=klient2.%Save()
+do $system.OBJ.DisplayError(p)
+
+
+
+
+Set towar1=##class(SprzedazInternetowa1.Towar).%New()
+Set towar1.NumerTowaru = 1
+Set towar1.NazwaTowaru = "film"
+Set towar1.OpisTowaru = " o milosci 18+ "
+Set towar1.DlaDoroslych = 1
+Set towar1.CenaTowaru = 15
+Set towar1.LiczbaDostepnych = 100
+
+Set towar2=##class(SprzedazInternetowa1.Towar).%New()
+Set towar2.NumerTowaru = 2
+Set towar2.NazwaTowaru = "film"
+Set towar2.OpisTowaru = " przygodowy"
+Set towar2.DlaDoroslych = 0
+Set towar2.CenaTowaru = 150
+Set towar2.LiczbaDostepnych = 100
+
+Set towar3=##class(SprzedazInternetowa1.Towar).%New()
+Set towar3.NumerTowaru = 3
+Set towar3.NazwaTowaru = "maslo"
+Set towar3.OpisTowaru = " produkt do smarowania chleba i smazenia"
+Set towar3.DlaDoroslych = 0
+Set towar3.CenaTowaru = 7
+Set towar3.LiczbaDostepnych = 100
+
+Set transakcja1 =##class(SprzedazInternetowa1.Transakcja).%New()
+Set transakcja1.NumerTransakcji = 1
+Set transakcja1.DataTransakcji= "2018-05-28"
+Set transakcja1.KwotaTransakcji = 36.5
+Set transakcja1.UbezpieczenieTransakcji = 1
+Set transakcja1.TraKli = ##class(SprzedazInternetowa1.Klient).%OpenId(1)
+Set transakcja1.TraPra = ##class(SprzedazInternetowa1.Pracownik).%OpenId(1)
+
+
+Set transakcja2 =##class(SprzedazInternetowa1.Transakcja).%New()
+Set transakcja2.NumerTransakcji = 2
+Set transakcja2.DataTransakcji= "2018-05-29"
+Set transakcja2.KwotaTransakcji = 10
+Set transakcja2.UbezpieczenieTransakcji = 0
+Set transakcja2.TraKli = ##class(SprzedazInternetowa1.Klient).%OpenId(2)
+Set transakcja2.TraPra = ##class(SprzedazInternetowa1.Pracownik).%OpenId(2)
+
+
+Set pozycjatransakcji1 =##class(SprzedazInternetowa1.PozycjaTransakcji).%New()
+Set pozycjatransakcji1.NumerTransakcji = 1
+Set pozycjatransakcji1.LiczbaPorzadkowa= 1
+Set pozycjatransakcji1.PoTo = ##class(SprzedazInternetowa1.Towar).%OpenId(1)
+Set pozycjatransakcji1.PoTra = ##class(SprzedazInternetowa1.Transakcja).%OpenId(1)
+
+
+Set pozycjatransakcji2 =##class(SprzedazInternetowa1.PozycjaTransakcji).%New()
+Set pozycjatransakcji2.NumerTransakcji = 1
+Set pozycjatransakcji2.LiczbaPorzadkowa= 2
+Set pozycjatransakcji2.PoTo = ##class(SprzedazInternetowa1.Towar).%OpenId(2)
+Set pozycjatransakcji2.PoTra = ##class(SprzedazInternetowa1.Transakcja).%OpenId(1)
+
+Set pozycjatransakcji3 =##class(SprzedazInternetowa1.PozycjaTransakcji).%New()
+Set pozycjatransakcji3.NumerTransakcji = 2
+Set pozycjatransakcji3.LiczbaPorzadkowa= 1
+Set pozycjatransakcji3.PoTo = ##class(SprzedazInternetowa1.Towar).%OpenId(2)
+Set pozycjatransakcji3.PoTra = ##class(SprzedazInternetowa1.Transakcja).%OpenId(2)
+
+
+Set pozycjatransakcji4 =##class(SprzedazInternetowa1.PozycjaTransakcji).%New()
+Set pozycjatransakcji4.NumerTransakcji = 2
+Set pozycjatransakcji4.LiczbaPorzadkowa= 2
+Set pozycjatransakcji4.PoTo = ##class(SprzedazInternetowa1.Towar).%OpenId(3)
+Set pozycjatransakcji4.PoTra = ##class(SprzedazInternetowa1.Transakcja).%OpenId(2)
+
+
+
+
+
+
+
+wklejanie do bazy:
+
+
+Do $SYSTEM.SQL.Shell()
+
+
+set pra1=##class(SprzedazInternetowa1.Pracownik).%OpenId(1)
+
+
+
+set p=stanowisko1.%Save()
+do $system.OBJ.DisplayError(p)
+
+set p=pra1.%Save()
+do $system.OBJ.DisplayError(p)
+
+set p=klient1.%Save()
+do $system.OBJ.DisplayError(p)
+
+
+set p=towar1.%Save()
+do $system.OBJ.DisplayError(p)
+set p=towar2.%Save()
+do $system.OBJ.DisplayError(p)
+set p=towar3.%Save()
+do $system.OBJ.DisplayError(p)
+
+
+set p=transakcja1.%Save()
+do $system.OBJ.DisplayError(p)
+
+set p=pozycjatransakcji1.%Save()
+do $system.OBJ.DisplayError(p)
+
+set p=pozycjatransakcji2.%Save()
+do $system.OBJ.DisplayError(p)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
